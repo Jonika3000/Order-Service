@@ -18,7 +18,7 @@ public sealed record OrderPlacedEventV2(
     IReadOnlyCollection<OrderPlacedItemEvent> Items,
     decimal TotalAmount,
     string? DeliveryAddress,
-    string DeliveryAddressNew,
+    string TargetAddress,
     LoyaltyTier LoyaltyTier,
     DateTime OccurredAt);
 
