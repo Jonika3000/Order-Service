@@ -14,7 +14,7 @@ public class OrderUpcaster
             Items:              old.Items,
             TotalAmount:        old.TotalAmount,
             DeliveryAddress:    null,
-            TargetAddress: old.DeliveryAddress,
+            TargetAddress:      old.DeliveryAddress,
             LoyaltyTier:        LoyaltyTier.Standard,
             OccurredAt:         old.OccurredAt
         );
