@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+option csharp_namespace = "OrderService.Contracts";
+
+package order;
+
+service OrderGrpc {
+  rpc CreateOrder (CreateOrderRequest) returns (CreateOrderReply);
+  rpc GetOrder (GetOrderRequest) returns (GetOrderReply);
+  rpc PayOrder (PayOrderRequest) returns (PayOrderReply);
+  rpc CancelOrder (CancelOrderRequest) returns (CancelOrderReply);
+}
+
+message CreateOrderRequest {
+  string customer_id = 1;
+  repeated CreateOrderItem items = 2;
+}
+
+message CreateOrderItem {
+  string product_id = 1;
+  string product_name = 2;
+  int32 quantity = 3;
+  double unit_price = 4;
+}
+
+message OrderPlaced {
+  string customer_id = 1;
+  repeated CreateOrderItem items = 2;
+  string city = 3;
+  string address = 4;
+  int32 apartament = 5;
+}
+
+message GetOrderRequest {
+  string order_id = 1;
+}
+
+message PayOrderRequest {
+  string order_id = 1;
+}
+
+message CancelOrderRequest {
+  string order_id = 1;
+}
+
+message CreateOrderReply {
+  OrderModel order = 1;
+}
+
+message GetOrderReply {
+  OrderModel order = 1;
+}
+
+message PayOrderReply {
+  OrderModel order = 1;
+}
+
+message CancelOrderReply {
+  OrderModel order = 1;
+}
+
+message OrderModel {
+  string order_id = 1;
+  string customer_id = 2;
+  OrderStatusModel status = 3;
+  double total_amount = 4;
+  string created_at_utc = 5;
+  string submitted_at_utc = 6;
+  string paid_at_utc = 7;
+  string cancelled_at_utc = 8;
+  repeated OrderItemModel items = 9;
+}
+
+message OrderItemModel {
+  string product_id = 1;
+  string product_name = 2;
+  int32 quantity = 3;
+  double unit_price = 4;
+  double total_price = 5;
+}
+
+enum OrderStatusModel {
+  ORDER_STATUS_MODEL_UNSPECIFIED = 0;
+  DRAFT = 1;
+  SUBMITTED = 2;
+  PAID = 3;
+  CANCELLED = 4;
+}
